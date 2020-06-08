@@ -23,7 +23,7 @@ const routes = [
       {
         path: 'detailspage',
         name: 'Detailspage',
-        component: ()=> import('../views/detailspage/Detailspage')
+        component: Home,
       }
     ]
   },

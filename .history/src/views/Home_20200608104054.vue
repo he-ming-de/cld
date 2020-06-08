@@ -39,6 +39,7 @@
       <el-pagination
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
+        :current-page="currentPage4"
         :page-sizes="[10, 20, 30, 40]"
         :page-size="10"
         layout="total, sizes, prev, pager, next, jumper"
@@ -80,7 +81,7 @@ export default {
       this.currentpage=val
     },
     goto(item){
-      this.$router.push({name:'Detailspage', query: {id:item.id}})
+      this.$router.push({name:'Detailspage'}, query: {id:item.id})
     }
   },
   mounted() {

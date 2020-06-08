@@ -9,7 +9,7 @@
         <div class="item4 p-r1 p-l1">招聘</div>
         <div class="item4 p-r1 p-l1">客户端测试</div>
       </div>
-      <div v-for="(item,index) in arr.slice((currentpage-1)*pagesize,currentpage*pagesize)" :key="index" class="item5 p1 d-f a-i-c">
+      <div v-for="(item,index) in arr" :key="index" class="item5 p1 d-f a-i-c">
         <div class="item6 hover">
           <img :src="item.author.avatar_url" width="30px" />
         </div>
@@ -20,7 +20,7 @@
         </div>
         <div class="m-l1">
           <div v-if="item.tab==='share'">
-            <div v-if="item.top===true">
+            <div v-if="index < 2">
               <div class="share">置顶</div>
             </div>
             <div v-else>
@@ -34,11 +34,12 @@
             <div class="share">精华</div>
           </div>
         </div>
-        <div class="m-l1 item7" @click="goto(item)">{{item.title}}</div>
+        <div class="m-l1 item7">{{item.title}}</div>
       </div>
       <el-pagination
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
+        :current-page="currentPage4"
         :page-sizes="[10, 20, 30, 40]"
         :page-size="10"
         layout="total, sizes, prev, pager, next, jumper"
@@ -56,8 +57,7 @@ export default {
   data() {
     return {
       arr: [],
-      currentpage:1,
-      pagesize:10
+      page-size:10
     };
   },
   components: {},
@@ -74,13 +74,10 @@ export default {
         });
     },
     handleSizeChange(val) {
-      this.pagesize=val
+      console.log(`每页 ${val} 条`);
     },
     handleCurrentChange(val) {
-      this.currentpage=val
-    },
-    goto(item){
-      this.$router.push({name:'Detailspage', query: {id:item.id}})
+      console.log(`当前页: ${val}`);
     }
   },
   mounted() {

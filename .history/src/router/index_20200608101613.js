@@ -20,11 +20,9 @@ const routes = [
         name: 'Home',
         component: Home,
       },
-      {
-        path: 'detailspage',
-        name: 'Detailspage',
-        component: ()=> import('../views/detailspage/Detailspage')
-      }
+        path: '',
+        name: 'Home',
+        component: Home,
     ]
   },
 

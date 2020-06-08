@@ -34,11 +34,12 @@
             <div class="share">精华</div>
           </div>
         </div>
-        <div class="m-l1 item7" @click="goto(item)">{{item.title}}</div>
+        <div class="m-l1 item7" @click="detailspage">{{item.title}}</div>
       </div>
       <el-pagination
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
+        :current-page="currentPage4"
         :page-sizes="[10, 20, 30, 40]"
         :page-size="10"
         layout="total, sizes, prev, pager, next, jumper"
@@ -79,8 +80,8 @@ export default {
     handleCurrentChange(val) {
       this.currentpage=val
     },
-    goto(item){
-      this.$router.push({name:'Detailspage', query: {id:item.id}})
+    detailspage(){
+      this.$router.push('/detailspage',)
     }
   },
   mounted() {

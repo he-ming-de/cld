@@ -9,7 +9,7 @@
         <div class="item4 p-r1 p-l1">招聘</div>
         <div class="item4 p-r1 p-l1">客户端测试</div>
       </div>
-      <div v-for="(item,index) in arr.slice((currentpage-1)*pagesize,currentpage*pagesize)" :key="index" class="item5 p1 d-f a-i-c">
+      <div v-for="(item,index) in arr" :key="index" class="item5 p1 d-f a-i-c">
         <div class="item6 hover">
           <img :src="item.author.avatar_url" width="30px" />
         </div>
@@ -20,7 +20,7 @@
         </div>
         <div class="m-l1">
           <div v-if="item.tab==='share'">
-            <div v-if="item.top===true">
+            <div v-if="index < 2">
               <div class="share">置顶</div>
             </div>
             <div v-else>
@@ -34,15 +34,16 @@
             <div class="share">精华</div>
           </div>
         </div>
-        <div class="m-l1 item7" @click="goto(item)">{{item.title}}</div>
+        <div class="m-l1 item7">{{item.title}}</div>
       </div>
       <el-pagination
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
-        :page-sizes="[10, 20, 30, 40]"
-        :page-size="10"
+        :current-page="currentPage4"
+        :page-sizes="[100, 200, 300, 400]"
+        :page-size="100"
         layout="total, sizes, prev, pager, next, jumper"
-        :total="40"
+        :total="400"
       ></el-pagination>
     </div>
   </div>
@@ -55,9 +56,7 @@ export default {
   props: {},
   data() {
     return {
-      arr: [],
-      currentpage:1,
-      pagesize:10
+      arr: []
     };
   },
   components: {},
@@ -72,15 +71,6 @@ export default {
         .catch(err => {
           console.log(err);
         });
-    },
-    handleSizeChange(val) {
-      this.pagesize=val
-    },
-    handleCurrentChange(val) {
-      this.currentpage=val
-    },
-    goto(item){
-      this.$router.push({name:'Detailspage', query: {id:item.id}})
     }
   },
   mounted() {
